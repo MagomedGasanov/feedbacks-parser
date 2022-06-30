@@ -1,0 +1,28 @@
+{
+  "name": "feedbacks-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagomedGasanov/feedbacks-parser.git"
+  },
+  "author": "Magomed Gasanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagomedGasanov/feedbacks-parser/issues"
+  },
+  "homepage": "https://github.com/MagomedGasanov/feedbacks-parser#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18",
+    "typescript": "^4.7.4"
+  }
+}
