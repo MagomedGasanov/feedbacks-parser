@@ -1,7 +1,7 @@
 import express from 'express';
-import * as feedbacksController from '../controller/gateway/feedbacks';
+import * as feedbacksController from '../controller/feedbacks';
 
-export const router = express.Router();
+const router = express.Router();
 
 router.get('/feedbacks', feedbacksController.getFeedbacks);
 
