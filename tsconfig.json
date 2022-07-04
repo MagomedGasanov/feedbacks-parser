@@ -4,9 +4,10 @@
       "noEmitOnError": true,
       "removeComments": true,
       "sourceMap": true,
-      "target": "es5",
+      "target": "ESNext",
       "outDir": "build",
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "module": "CommonJS"
     },
     "include": [
       "src/**/*.ts", 
