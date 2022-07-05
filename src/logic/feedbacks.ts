@@ -1,6 +1,5 @@
 import { DeliveryClubPuppeteer } from '../model/puppeteer/delivery-club/delivery-club-puppeteer';
-import fs from 'fs';
-import { FeedBack } from '../model/sql/feedback';
+import { FeedBack as FeedBackSQL } from '../model/sql/feedback';
 
 export class FeedbacksLogic {
     #deliveryClubPuppeteer: DeliveryClubPuppeteer;
@@ -10,16 +9,22 @@ export class FeedbacksLogic {
     }
 
     async updateFeedbacks(vendorName: string) {
-        const feedbacks = await this.#deliveryClubPuppeteer.getFeedbacksForVendor(vendorName);
-        console.log(feedbacks.length)
-        const text = feedbacks;
-        fs.writeFile('new.txt', JSON.stringify(text), (err) => {
-            console.log(err)
+        const feedbacksFromHTML = await this.#deliveryClubPuppeteer.getFeedbacksForVendor(vendorName);
+
+        FeedBackSQL.clearAllRecords();
+
+        feedbacksFromHTML.forEach((feedBack) => {
+            const { userName, date, orderInfo, reviewText, vendorAnswerText } = feedBack;
+            const feedBackSQL = new FeedBackSQL(userName, date, reviewText, orderInfo, vendorAnswerText, vendorName);
+            feedBackSQL.save();
         });
     }
 
     async getFeedbacks(vendorName: string, page: number) {
-        const feedBack = new FeedBack();
-        return feedBack.getPageOfReviews(page, vendorName);
+        if (!page) {
+            const feedbacks = await FeedBackSQL.getAllFeedbacksForVendor(vendorName);
+            return feedbacks.rows;
+        }
+        return FeedBackSQL.getPageOfReviews(page, vendorName);
     }
 }

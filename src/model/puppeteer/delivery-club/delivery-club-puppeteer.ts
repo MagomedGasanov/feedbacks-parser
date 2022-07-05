@@ -29,7 +29,7 @@ export class DeliveryClubPuppeteer extends AbstractPuppeteerClient {
                 await this.page.waitForTimeout(500);
                 console.log(`Click ${count}`)
                 ++count
-                if (count > 100) {
+                if (count > 20) {
                     break;
                 }
             } catch (e) {

@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from 'express'
 import { FeedbacksLogic } from '../logic/feedbacks';
 
-export const getFeedbacks = (req: Request, res: Response, next: NextFunction) => {
+export const getFeedbacks = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const page = req.query.page;
         const vendorName = req.query.vendorNAme;
         const feedbacksLogic = new FeedbacksLogic();
 
-        res.send(feedbacksLogic.getFeedbacks(String(vendorName), Number(page)));
+        const result = await feedbacksLogic.getFeedbacks(String(vendorName), Number(page));
+        res.json(result);
     } catch (e) {
         console.log(e);
         res.send('Oops')
