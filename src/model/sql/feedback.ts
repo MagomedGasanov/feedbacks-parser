@@ -36,9 +36,9 @@ export class FeedBack {
         
     }
     
-    static clearAllRecords() {
+    static clearAllRecordsForVendor(vendorName: string) {
         db.query(
-            `DELETE FROM reviews_table`,
+            `DELETE FROM reviews_table WHERE vendor_name='${vendorName}'`,
             (error, results) => {
                 if (error) {
                     console.log(error)

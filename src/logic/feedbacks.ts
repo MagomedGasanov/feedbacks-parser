@@ -11,7 +11,7 @@ export class FeedbacksLogic {
     async updateFeedbacks(vendorName: string) {
         const feedbacksFromHTML = await this.#deliveryClubPuppeteer.getFeedbacksForVendor(vendorName);
 
-        FeedBackSQL.clearAllRecords();
+        FeedBackSQL.clearAllRecordsForVendor(vendorName);
 
         feedbacksFromHTML.forEach((feedBack) => {
             const { userName, date, orderInfo, reviewText, vendorAnswerText } = feedBack;
